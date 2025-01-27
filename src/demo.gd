@@ -21,8 +21,8 @@ var _moving_debug_press_start = Vector2()
 @onready var _cube: MeshInstance3D = %Cube
 @onready var _prism: MeshInstance3D = %Prism
 
-@export var palettes = []
-@export var dither_patterns = []
+@export var palettes: Array[Texture2D] = []
+@export var dither_patterns: Array[Texture2D] = []
 
 func _ready():
 	_viewport_container.material.set_shader_parameter("u_color_tex", palettes[0])

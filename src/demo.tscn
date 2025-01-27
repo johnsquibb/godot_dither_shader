@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://w1v3mrflermp"]
+[gd_scene load_steps=27 format=3 uid="uid://w1v3mrflermp"]
 
 [ext_resource type="Shader" path="res://shader/dither.gdshader" id="1"]
 [ext_resource type="PackedScene" path="res://src/control_slider.tscn" id="2"]
@@ -36,6 +36,9 @@ size = Vector2(25, 25)
 [sub_resource type="BoxMesh" id="4"]
 
 [sub_resource type="PrismMesh" id="5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc2n0"]
+bg_color = Color(0.223529, 0.211765, 0.25098, 1)
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_fnyuk"]
 
@@ -127,6 +130,7 @@ current_tab = 0
 
 [node name="Parameters" type="PanelContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc2n0")
 metadata/_tab_index = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters"]
@@ -169,48 +173,56 @@ layout_mode = 2
 [node name="HSeparator4" type="HSeparator" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params"]
 layout_mode = 2
 
-[node name="Palette" type="HBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params"]
+layout_mode = 2
+
+[node name="Palette" type="HBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("9")
 
-[node name="Label" type="Label" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette"]
+[node name="Label" type="Label" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette"]
 layout_mode = 2
 text = "Palette"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette"]
 layout_mode = 2
 
-[node name="Checkbox" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer"]
+[node name="Checkbox" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+button_group = SubResource("ButtonGroup_fnyuk")
+
+[node name="Checkbox2" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_fnyuk")
 
-[node name="Checkbox2" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer"]
+[node name="Checkbox3" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_fnyuk")
 
-[node name="Checkbox3" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer"]
+[node name="Checkbox4" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_fnyuk")
 
-[node name="Checkbox4" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer"]
+[node name="Checkbox5" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_group = SubResource("ButtonGroup_fnyuk")
 
-[node name="Checkbox5" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-button_group = SubResource("ButtonGroup_fnyuk")
 
-[node name="PalettePreview" type="TextureRect" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params"]
+[node name="PalettePreview" type="TextureRect" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+size_flags_horizontal = 3
 expand_mode = 1
 stretch_mode = 5
 
@@ -233,6 +245,7 @@ layout_mode = 2
 [node name="Dither1" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Dither/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+button_pressed = true
 button_group = SubResource("ButtonGroup_3yamp")
 
 [node name="Dither2" type="CheckBox" parent="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Dither/MarginContainer"]
@@ -259,6 +272,7 @@ button_group = SubResource("ButtonGroup_3yamp")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_horizontal = 0
 expand_mode = 1
 stretch_mode = 5
 
@@ -282,11 +296,11 @@ offset_right = 227.0
 offset_bottom = 21.0
 icon = ExtResource("7")
 
-[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer/Checkbox" to="." method="_on_Checkbox_pressed"]
-[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer/Checkbox2" to="." method="_on_Checkbox2_pressed"]
-[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer/Checkbox3" to="." method="_on_Checkbox3_pressed"]
-[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer/Checkbox4" to="." method="_on_Checkbox4_pressed"]
-[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Palette/HBoxContainer/Checkbox5" to="." method="_on_Checkbox5_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer/Checkbox" to="." method="_on_Checkbox_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer/Checkbox2" to="." method="_on_Checkbox2_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer/Checkbox3" to="." method="_on_Checkbox3_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer/Checkbox4" to="." method="_on_Checkbox4_pressed"]
+[connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/VBoxContainer/Palette/HBoxContainer/Checkbox5" to="." method="_on_Checkbox5_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Dither/MarginContainer/Dither1" to="." method="_on_Dither1_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Dither/MarginContainer/Dither2" to="." method="_on_Dither2_pressed"]
 [connection signal="pressed" from="Controls/MarginContainer/DebugControls/DebugControlsTabContainer/Parameters/MarginContainer/Params/Dither/MarginContainer/Dither3" to="." method="_on_Dither3_pressed"]
