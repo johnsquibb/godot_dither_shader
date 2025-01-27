@@ -5,38 +5,32 @@ var _moving_debug = false
 var _debug_init_pos = Vector2()
 var _moving_debug_press_start = Vector2()
 
-@onready var _viewport_container = get_node("SubViewportContainer")
-@onready var _viewport = get_node("SubViewportContainer/SubViewport")
+@onready var _viewport_container: SubViewportContainer = %SubViewportContainer
+@onready var _debug_controls: Control = %DebugControls
+@onready var _debug_controls_tab_container: TabContainer = %DebugControlsTabContainer
+@onready var _control_bitdepth: HBoxContainer = %ControlBitDepth
+@onready var _control_contrast: HBoxContainer = %ControlContrast
+@onready var _control_dithersize: HBoxContainer = %ControlDitherSize
+@onready var _control_offset: HBoxContainer = %ControlOffset
+@onready var _palette_preview: TextureRect = %PalettePreview
+@onready var _dither_preview: TextureRect = %DitherPreview
+@onready var _dither_label: Label = %DitherLabel
+@onready var _gradient: TextureRect = %GradientTexture
 
-@onready var _debug_controls = get_node("Controls/Control")
-@onready var _debug_controls_tab_container = get_node("Controls/Control/TabContainer")
-@onready var _control_bitdepth = get_node("Controls/Control/TabContainer/Params/BitDepth")
-@onready var _control_contrast = get_node("Controls/Control/TabContainer/Params/Contrast")
-@onready var _control_dithersize = get_node("Controls/Control/TabContainer/Params/DitherSize")
-@onready var _control_offset = get_node("Controls/Control/TabContainer/Params/Offset")
-@onready var _palette_preview = get_node("Controls/Control/TabContainer/Params/PalettePreview")
-@onready var _dither_preview = get_node("Controls/Control/TabContainer/Params/DitherPreview")
-@onready var _dither_label = get_node("Controls/Control/TabContainer/Params/DitherLabel")
-
-@onready var _gradient = get_node("SubViewportContainer/SubViewport/Gradient")
-@onready var _sphere = get_node("SubViewportContainer/SubViewport/Primitives/Sphere")
-@onready var _cube = get_node("SubViewportContainer/SubViewport/Primitives/Cube")
-@onready var _prism = get_node("SubViewportContainer/SubViewport/Primitives/Prism")
+@onready var _sphere: MeshInstance3D = %Sphere
+@onready var _cube: MeshInstance3D = %Cube
+@onready var _prism: MeshInstance3D = %Prism
 
 @export var palettes = []
 @export var dither_patterns = []
 
 func _ready():
-	_viewport.size = get_viewport().size
-	
 	_viewport_container.material.set_shader_parameter("u_color_tex", palettes[0])
 	_palette_preview.texture = palettes[0]
 	
 	_viewport_container.material.set_shader_parameter("u_dither_tex", dither_patterns[0])
 	_dither_preview.texture = dither_patterns[0]
 	_dither_label.text = "Bayer 16x16"
-	
-	_debug_controls.position.x = get_viewport().size.x - 300.0
 	
 	_control_bitdepth.setup("Bit Depth", 2, 64, 32, 1)
 	_control_contrast.setup("Contrast", 0.0, 5.0, 1.0, 0.01)
@@ -48,9 +42,9 @@ func _ready():
 func _process(delta):
 	_timer += delta
 	
-	_sphere.transform.origin.y = 2.5 + sin(_timer) * 1.0	
-	_cube.transform.origin.y = 2.5 + sin(_timer + PI * 0.5) * 1.0
-	_prism.transform.origin.y = 2.5 + sin(_timer + PI) * 1.0
+	_sphere.transform.origin.y = 2 + sin(_timer)
+	_cube.transform.origin.y = 2 + sin(_timer + PI * 0.5)
+	_prism.transform.origin.y = 2 + sin(_timer + PI)
 	
 	_cube.rotation.y = _timer
 	_prism.rotation.z = _timer
