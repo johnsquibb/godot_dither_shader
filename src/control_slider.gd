@@ -12,4 +12,4 @@ func get_value():
 	return $ValueSlider.value
 
 func _on_ValueSlider_value_changed(value):
-	$ValueLabel.text = String($ValueSlider.value)
+	$ValueLabel.text = str($ValueSlider.value)

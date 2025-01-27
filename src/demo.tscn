@@ -1,339 +1,234 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://w1v3mrflermp"]
 
-[ext_resource path="res://shader/dither.shader" type="Shader" id=1]
-[ext_resource path="res://src/control_slider.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/min.png" type="Texture" id=3]
-[ext_resource path="res://assets/bayer16tile2.png" type="Texture" id=4]
-[ext_resource path="res://assets/bayer4tile8.png" type="Texture" id=5]
-[ext_resource path="res://assets/test.png" type="Texture" id=6]
-[ext_resource path="res://assets/move.png" type="Texture" id=7]
-[ext_resource path="res://src/demo.gd" type="Script" id=8]
-[ext_resource path="res://src/control_slider.gd" type="Script" id=9]
-[ext_resource path="res://assets/palette_eeve.png" type="Texture" id=10]
-[ext_resource path="res://assets/palette_moonlight.png" type="Texture" id=11]
-[ext_resource path="res://assets/palette_mono.png" type="Texture" id=12]
-[ext_resource path="res://assets/palette_hollow.png" type="Texture" id=13]
-[ext_resource path="res://assets/palette_rising_sun.png" type="Texture" id=14]
-[ext_resource path="res://assets/bayer2tile16.png" type="Texture" id=15]
-[ext_resource path="res://assets/blue_noise.png" type="Texture" id=16]
-[ext_resource path="res://assets/bayer8tile4.png" type="Texture" id=17]
+[ext_resource type="Shader" path="res://shader/dither.gdshader" id="1"]
+[ext_resource type="PackedScene" path="res://src/control_slider.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://cg6fefktccfik" path="res://assets/min.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://6h76n0r2dthp" path="res://assets/bayer16tile2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bb7mf7cvafx4b" path="res://assets/bayer4tile8.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://v788v44gu0wo" path="res://assets/test.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://d3nggoecy34dp" path="res://assets/move.png" id="7"]
+[ext_resource type="Script" path="res://src/demo.gd" id="8"]
+[ext_resource type="Script" path="res://src/control_slider.gd" id="9"]
+[ext_resource type="Texture2D" uid="uid://6frtrou3e7a3" path="res://assets/palette_eeve.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://kwa38eqsnlus" path="res://assets/palette_moonlight.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://347nceryv05h" path="res://assets/palette_mono.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bojyivndsby0s" path="res://assets/palette_hollow.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://bxs2ayp6ob2be" path="res://assets/palette_rising_sun.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://dmba5cin8724b" path="res://assets/bayer2tile16.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bkh776kehcyl" path="res://assets/blue_noise.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://b5jmaruhsyade" path="res://assets/bayer8tile4.png" id="17"]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/u_bit_depth = 32
-shader_param/u_contrast = 1.0
-shader_param/u_offset = null
-shader_param/u_dither_size = 2
-shader_param/u_dither_tex = ExtResource( 4 )
-shader_param/u_color_tex = ExtResource( 11 )
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("1")
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = null
+shader_parameter/u_dither_size = 2
+shader_parameter/u_dither_tex = ExtResource("4")
+shader_parameter/u_color_tex = ExtResource("11")
 
-[sub_resource type="PlaneMesh" id=2]
-size = Vector2( 25, 25 )
+[sub_resource type="PlaneMesh" id="2"]
+size = Vector2(25, 25)
 
-[sub_resource type="SphereMesh" id=3]
+[sub_resource type="SphereMesh" id="3"]
 
-[sub_resource type="CubeMesh" id=4]
+[sub_resource type="BoxMesh" id="4"]
 
-[sub_resource type="PrismMesh" id=5]
+[sub_resource type="PrismMesh" id="5"]
 
-[sub_resource type="ButtonGroup" id=6]
+[node name="Demo" type="Node3D"]
+script = ExtResource("8")
+palettes = [ExtResource("12"), ExtResource("11"), ExtResource("10"), ExtResource("13"), ExtResource("14")]
+dither_patterns = [ExtResource("4"), ExtResource("17"), ExtResource("5"), ExtResource("15"), ExtResource("16")]
 
-[sub_resource type="ButtonGroup" id=7]
-
-[node name="Demo" type="Spatial"]
-script = ExtResource( 8 )
-palettes = [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ]
-dither_patterns = [ ExtResource( 4 ), ExtResource( 17 ), ExtResource( 5 ), ExtResource( 15 ), ExtResource( 16 ) ]
-
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-material = SubResource( 1 )
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("1")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-hdr = false
-render_target_update_mode = 3
-shadow_atlas_size = 1024
+render_target_update_mode = 4
 
-[node name="Gradient" type="TextureRect" parent="ViewportContainer/Viewport"]
-margin_right = 40.0
-margin_bottom = 40.0
-texture = ExtResource( 6 )
-expand = true
+[node name="Gradient" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6")
+expand_mode = 1
 
-[node name="DirectionalLight" type="DirectionalLight" parent="ViewportContainer/Viewport"]
-transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 7.33164, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 7.33164, 0)
 shadow_enabled = true
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52829, 6.27066 )
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52829, 6.27066)
 
-[node name="Primitives" type="Spatial" parent="ViewportContainer/Viewport"]
+[node name="Primitives" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="Plane" type="MeshInstance" parent="ViewportContainer/Viewport/Primitives"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.103946, -0.0237961, -0.066411 )
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Plane" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Primitives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.103946, -0.0237961, -0.066411)
+mesh = SubResource("2")
 
-[node name="Sphere" type="MeshInstance" parent="ViewportContainer/Viewport/Primitives"]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.742296, 2.33721, 1.39276 )
-mesh = SubResource( 3 )
-material/0 = null
+[node name="Sphere" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Primitives"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.742296, 2.33721, 1.39276)
+mesh = SubResource("3")
 
-[node name="Cube" type="MeshInstance" parent="ViewportContainer/Viewport/Primitives"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09066, 2.26568, 0.0691072 )
-mesh = SubResource( 4 )
-material/0 = null
+[node name="Cube" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Primitives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09066, 2.26568, 0.0691072)
+mesh = SubResource("4")
 
-[node name="Prism" type="MeshInstance" parent="ViewportContainer/Viewport/Primitives"]
-transform = Transform( 0.895254, 0, 0.445557, 0, 1, 0, -0.445557, 0, 0.895254, 4.20599, 2.26568, 0.964667 )
-mesh = SubResource( 5 )
-material/0 = null
+[node name="Prism" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Primitives"]
+transform = Transform3D(0.895254, 0, 0.445557, 0, 1, 0, -0.445557, 0, 0.895254, 4.20599, 2.26568, 0.964667)
+mesh = SubResource("5")
 
 [node name="Controls" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="Controls"]
-margin_left = 659.0
-margin_top = 11.0
-margin_right = 699.0
-margin_bottom = 51.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 3
+anchors_preset = 0
+offset_left = 659.0
+offset_top = 11.0
+offset_right = 699.0
+offset_bottom = 51.0
 
 [node name="TabContainer" type="TabContainer" parent="Controls/Control"]
-margin_right = 288.0
-margin_bottom = 196.0
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 196.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-tab_align = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+current_tab = 0
 
 [node name="Params" type="VBoxContainer" parent="Controls/Control/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-rect_min_size = Vector2( 280, 0 )
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
 size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+metadata/_tab_index = 0
 
-[node name="BitDepth" parent="Controls/Control/TabContainer/Params" instance=ExtResource( 2 )]
-margin_bottom = 16.0
+[node name="BitDepth" parent="Controls/Control/TabContainer/Params" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="Controls/Control/TabContainer/Params"]
-margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 24.0
+layout_mode = 2
 
-[node name="DitherSize" parent="Controls/Control/TabContainer/Params" instance=ExtResource( 2 )]
-margin_top = 28.0
-margin_bottom = 44.0
+[node name="DitherSize" parent="Controls/Control/TabContainer/Params" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="Controls/Control/TabContainer/Params"]
-margin_top = 48.0
-margin_right = 280.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
-[node name="Contrast" parent="Controls/Control/TabContainer/Params" instance=ExtResource( 2 )]
-margin_top = 56.0
-margin_bottom = 72.0
+[node name="Contrast" parent="Controls/Control/TabContainer/Params" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="Controls/Control/TabContainer/Params"]
-margin_top = 76.0
-margin_right = 280.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
-[node name="Offset" parent="Controls/Control/TabContainer/Params" instance=ExtResource( 2 )]
-margin_top = 84.0
-margin_bottom = 100.0
+[node name="Offset" parent="Controls/Control/TabContainer/Params" instance=ExtResource("2")]
+layout_mode = 2
 
 [node name="HSeparator4" type="HSeparator" parent="Controls/Control/TabContainer/Params"]
-margin_top = 104.0
-margin_right = 280.0
-margin_bottom = 108.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Palette" type="HBoxContainer" parent="Controls/Control/TabContainer/Params"]
-margin_top = 112.0
-margin_right = 280.0
-margin_bottom = 136.0
+layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("9")
 
 [node name="Label" type="Label" parent="Controls/Control/TabContainer/Params/Palette"]
-margin_top = 5.0
-margin_right = 45.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "Palette"
-align = 2
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Controls/Control/TabContainer/Params/Palette"]
-margin_left = 49.0
-margin_right = 185.0
-margin_bottom = 24.0
+layout_mode = 2
 
 [node name="Checkbox" type="CheckBox" parent="Controls/Control/TabContainer/Params/Palette/HBoxContainer"]
-margin_right = 24.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-pressed = true
-group = SubResource( 6 )
 
 [node name="Checkbox2" type="CheckBox" parent="Controls/Control/TabContainer/Params/Palette/HBoxContainer"]
-margin_left = 28.0
-margin_right = 52.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 6 )
 
 [node name="Checkbox3" type="CheckBox" parent="Controls/Control/TabContainer/Params/Palette/HBoxContainer"]
-margin_left = 56.0
-margin_right = 80.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 6 )
 
 [node name="Checkbox4" type="CheckBox" parent="Controls/Control/TabContainer/Params/Palette/HBoxContainer"]
-margin_left = 84.0
-margin_right = 108.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 6 )
 
 [node name="Checkbox5" type="CheckBox" parent="Controls/Control/TabContainer/Params/Palette/HBoxContainer"]
-margin_left = 112.0
-margin_right = 136.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 6 )
 
 [node name="PalettePreview" type="TextureRect" parent="Controls/Control/TabContainer/Params"]
-margin_top = 140.0
-margin_right = 280.0
-margin_bottom = 156.0
-rect_min_size = Vector2( 16, 16 )
-expand = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="HSeparator5" type="HSeparator" parent="Controls/Control/TabContainer/Params"]
-margin_top = 160.0
-margin_right = 280.0
-margin_bottom = 164.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
 
 [node name="Dither" type="HBoxContainer" parent="Controls/Control/TabContainer/Params"]
-margin_top = 168.0
-margin_right = 280.0
-margin_bottom = 192.0
+layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource("9")
 
 [node name="Label" type="Label" parent="Controls/Control/TabContainer/Params/Dither"]
-margin_top = 5.0
-margin_right = 90.0
-margin_bottom = 19.0
+layout_mode = 2
 text = "Dither Pattern"
-align = 2
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="HBoxContainer" parent="Controls/Control/TabContainer/Params/Dither"]
-margin_left = 94.0
-margin_right = 230.0
-margin_bottom = 24.0
+layout_mode = 2
 
 [node name="Dither1" type="CheckBox" parent="Controls/Control/TabContainer/Params/Dither/MarginContainer"]
-margin_right = 24.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-pressed = true
-group = SubResource( 7 )
 
 [node name="Dither2" type="CheckBox" parent="Controls/Control/TabContainer/Params/Dither/MarginContainer"]
-margin_left = 28.0
-margin_right = 52.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 7 )
 
 [node name="Dither3" type="CheckBox" parent="Controls/Control/TabContainer/Params/Dither/MarginContainer"]
-margin_left = 56.0
-margin_right = 80.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 7 )
 
 [node name="Dither4" type="CheckBox" parent="Controls/Control/TabContainer/Params/Dither/MarginContainer"]
-margin_left = 84.0
-margin_right = 108.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 7 )
 
 [node name="Dither5" type="CheckBox" parent="Controls/Control/TabContainer/Params/Dither/MarginContainer"]
-margin_left = 112.0
-margin_right = 136.0
-margin_bottom = 24.0
+layout_mode = 2
 size_flags_horizontal = 3
-group = SubResource( 7 )
 
 [node name="DitherPreview" type="TextureRect" parent="Controls/Control/TabContainer/Params"]
-margin_top = 196.0
-margin_right = 280.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 32, 32 )
-expand = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="DitherLabel" type="Label" parent="Controls/Control/TabContainer/Params"]
-margin_top = 232.0
-margin_right = 280.0
-margin_bottom = 246.0
+layout_mode = 2
 
 [node name="Minimise" type="Button" parent="Controls/Control"]
-margin_left = 231.0
-margin_top = -1.0
-margin_right = 259.0
-margin_bottom = 21.0
-icon = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 0
+offset_left = 231.0
+offset_top = -1.0
+offset_right = 259.0
+offset_bottom = 21.0
+icon = ExtResource("3")
 
 [node name="Move" type="Button" parent="Controls/Control"]
-margin_left = 199.0
-margin_top = -1.0
-margin_right = 227.0
-margin_bottom = 21.0
-icon = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 0
+offset_left = 199.0
+offset_top = -1.0
+offset_right = 227.0
+offset_bottom = 21.0
+icon = ExtResource("7")
 
 [connection signal="pressed" from="Controls/Control/TabContainer/Params/Palette/HBoxContainer/Checkbox" to="." method="_on_Checkbox_pressed"]
 [connection signal="pressed" from="Controls/Control/TabContainer/Params/Palette/HBoxContainer/Checkbox2" to="." method="_on_Checkbox2_pressed"]
